@@ -1,41 +1,44 @@
 #include "sort.h"
 
-/**
- * insertion_sort_list - Trie une liste doublement chaînée par insertion
- * @list: Un double pointeur vers le début de la liste
+/*
+ * insertion_sort_list - Function that sorts a doubly linked list of integers
+ *                       in ascending order using the Insertion sort algorithm.
+ * @list: Double pointer to the head of the doubly linked list.
  *
- * Description: Trie une liste doublement chaînée en utilisant l'algorithme de
- * tri par insertion. La liste est triée par ordre croissant.
+ * Description: This function implements the Insertion sort algorithm to sort
+ * a doubly linked list in ascending order. It takes the double pointer to the
+ * head of the list as input and modifies the list in place.
  */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current = (*list)->next;
-	listint_t *temp = NULL;
+    listint_t *current = (*list)->next;
+    listint_t *temp = NULL;
 
-	if (list == NULL || *list == NULL || (*list)->next == NULL)
-		return;
+    if (list == NULL || *list == NULL || (*list)->next == NULL)
+        return;
 
+    while (current != NULL)
+    {
+        temp = current;
+        while (temp->prev != NULL && temp->n < temp->prev->n)
+        {
+            if (temp->next != NULL)
+                temp->next->prev = temp->prev;
+            temp->prev->next = temp->next;
 
-	while (current != NULL)
-	{
-		temp = current;
-		while (temp->prev != NULL && temp->n < temp->prev->n)
-		{
-			if (temp->next != NULL)
-				temp->next->prev = temp->prev;
-			temp->prev->next = temp->next;
+            temp->next = temp->prev;
+            temp->prev = temp->prev->prev;
+            temp->next->prev = temp;
 
-			temp->next = temp->prev;
-			temp->prev = temp->prev->prev;
-			temp->next->prev = temp;
+            if (temp->prev == NULL)
+                *list = temp;
+            else
+                temp->prev->next = temp;
 
-			if (temp->prev == NULL)
-				*list = temp;
-			else
-				temp->prev->next = temp;
+            print_list(*list);
+        }
 
-			print_list(*list);
-		}
-
-	}
+        current = current->next;
+    }
 }
