@@ -1,66 +1,75 @@
 #include "sort.h"
 
 /**
- * swap - Échange les valeurs de deux entiers.
- * @a: Pointeur vers le premier entier.
- * @b: Pointeur vers le deuxième entier.
+ * partition - Performs the partitioning of the array
+ * @array: Array to be sorted
+ * @low: Starting index of the partition
+ * @high: Ending index of the partition
+ * @size: Size of the array
+ * Return: Index of the pivot after partitioning
  */
-void swap(int *a, int *b)
+int partition(int *array, int low, int high, size_t size)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
-}
+	int pivot;
+	int i = low - 1, temp = 0, j = 0;
 
-/**
- * partition - Effectue le partitionnement pour le tri rapide.
- * @array: Tableau d'entiers à trier.
- * @low: Indice de début de la partition.
- * @high: Indice de fin de la partition.
- *
- * Return: L'indice du pivot après partitionnement.
- */
-int partition(int *array, int low, int high)
-{
-	int pivot = array[high];
-	int i = low - 1;
-	int j;
+	pivot = array[high];
 
-	for (j = low; j <= high - 1; j++)
+	for (j = low; j < high; j++)
 	{
 		if (array[j] < pivot)
 		{
 			i++;
-			swap(&array[i], &array[j]);
+			if (i != j)
+			{
+				temp = array[i];
+				array[i] = array[j];
+				array[j] = temp;
+				print_array(array, size);
+			}
 		}
 	}
-	swap(&array[i + 1], &array[high]);
+	if (array[high] < array[i + 1])
+	{
+		temp = array[i + 1];
+		array[i + 1] = array[high];
+		array[high] = temp;
+		print_array(array, size);
+	}
 	return (i + 1);
 }
 
 /**
- * quick_sort_helper - Fonction auxiliaire pour effectuer le tri récursive.
- * @array: Tableau d'entiers à trier.
- * @low: Indice de début de la partition.
- * @high: Indice de fin de la partition.
+ * quick_sort_helper - Recursive helper function to perform quick sort
+ * using the Lomuto partition scheme
+ * @array: Array to be sorted
+ * @low: Starting index of the partition
+ * @high: Ending index of the partition
+ * @size: Size of the array
  */
-void quick_sort_helper(int *array, int low, int high)
+void quick_sort_helper(int *array, int low, int high, size_t size)
 {
+	int pivot_index;
+
 	if (low < high)
 	{
-		int partition_index = partition(array, low, high);
+		pivot_index = partition(array, low, high, size);
 
-		quick_sort_helper(array, low, partition_index - 1);
-		quick_sort_helper(array, partition_index + 1, high);
+		quick_sort_helper(array, low, pivot_index - 1, size);
+		quick_sort_helper(array, pivot_index + 1, high, size);
 	}
 }
 
 /**
- * quick_sort - Effectue le tri rapide sur un tableau.
- * @array: Tableau d'entiers à trier.
- * @size: Taille du tableau.
+ * quick_sort - Sorts an array of integers using
+ * the Quick Sort algorithm with the Lomuto partition scheme
+ * @array: Array to be sorted
+ * @size: Size of the array
  */
 void quick_sort(int *array, size_t size)
 {
-	quick_sort_helper(array, 0, size - 1);
+	if (array == NULL || size < 2)
+		return;
+
+	quick_sort_helper(array, 0, size - 1, size);
 }
