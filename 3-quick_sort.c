@@ -1,11 +1,10 @@
 #include "sort.h"
 
 /**
- *Fonction de swap pour échanger les valeurs de deux entiers.
- * @param a Pointeur vers le premier entier.
- * @param b Pointeur vers le deuxième entier.
+ * swap - Échange les valeurs de deux entiers.
+ * @a: Pointeur vers le premier entier.
+ * @b: Pointeur vers le deuxième entier.
  */
-
 void swap(int *a, int *b)
 {
 	int temp = *a;
@@ -14,13 +13,13 @@ void swap(int *a, int *b)
 }
 
 /**
- *Fonction de partitionnement pour le tri rapide.
- * @param array Tableau d'entiers à trier.
- * @param low Indice de début de la partition.
- * @param high Indice de fin de la partition.
- * @return L'indice du pivot après partitionnement.
+ * partition - Effectue le partitionnement pour le tri rapide.
+ * @array: Tableau d'entiers à trier.
+ * @low: Indice de début de la partition.
+ * @high: Indice de fin de la partition.
+ * 
+ * Return: L'indice du pivot après partitionnement.
  */
-
 int partition(int *array, int low, int high)
 {
 	int pivot = array[high];
@@ -40,12 +39,11 @@ int partition(int *array, int low, int high)
 }
 
 /**
- *Fonction auxiliaire pour effectuer le tri rapide de manière récursive.
- * @param array Tableau d'entiers à trier.
- * @param low Indice de début de la partition.
- * @param high Indice de fin de la partition.
+ * quick_sort_helper - Fonction auxiliaire pour effectuer le tri rapide de manière récursive.
+ * @array: Tableau d'entiers à trier.
+ * @low: Indice de début de la partition.
+ * @high: Indice de fin de la partition.
  */
-
 void quick_sort_helper(int *array, int low, int high)
 {
 	if (low < high)
@@ -58,11 +56,10 @@ void quick_sort_helper(int *array, int low, int high)
 }
 
 /**
- *Fonction principale pour effectuer le tri rapide sur un tableau.
- * @param array Tableau d'entiers à trier.
- * @param size Taille du tableau.
+ * quick_sort - Effectue le tri rapide sur un tableau.
+ * @array: Tableau d'entiers à trier.
+ * @size: Taille du tableau.
  */
-
 void quick_sort(int *array, size_t size)
 {
 	quick_sort_helper(array, 0, size - 1);
