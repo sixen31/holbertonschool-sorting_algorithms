@@ -1,13 +1,13 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - Sorts a double-chained list of integers using the insertion sort algorithm.
+ * insertion_sort_list - Sorts a double-chained list of the insertion sort algorithm.
  *
  *@list: A pointer to a pointer to the first element in the list.
  *
  * Description :
- * This function sorts a double-chained list of integers using the insertion sort algorithm.
- * It traverses the list by comparing each element with the previous elements and reorganizes the links
+ * This function sorts a double-chained list of the insertion sort algorithm.
+ * It traverses the list by comparing  element with the previous elements and reorganizes the links
  * Rearrange the links accordingly to insert each element in its correct place.
  */
 
