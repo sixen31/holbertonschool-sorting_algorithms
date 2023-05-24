@@ -17,7 +17,7 @@ void swap(int *a, int *b)
  * @array: Tableau d'entiers à trier.
  * @low: Indice de début de la partition.
  * @high: Indice de fin de la partition.
- * 
+ *
  * Return: L'indice du pivot après partitionnement.
  */
 int partition(int *array, int low, int high)
@@ -39,7 +39,7 @@ int partition(int *array, int low, int high)
 }
 
 /**
- * quick_sort_helper - Fonction auxiliaire pour effectuer le tri rapide de manière récursive.
+ * quick_sort_helper - Fonction auxiliaire pour effectuer le tri récursive.
  * @array: Tableau d'entiers à trier.
  * @low: Indice de début de la partition.
  * @high: Indice de fin de la partition.
