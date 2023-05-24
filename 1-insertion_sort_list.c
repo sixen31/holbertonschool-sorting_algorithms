@@ -1,31 +1,27 @@
 #include "sort.h"
+
 /**
-* insertion_sort_list - Sorts a doubly linked list using insertion sort
-* @list: Double pointer to the beginning of the list
-* The list is sorted in ascending order.
-*/
+ * insertion_sort_list - Trie une liste doublement chaînée par insertion
+ * @list: Un double pointeur vers le début de la liste
+ *
+ * Description: Trie une liste doublement chaînée en utilisant l'algorithme de
+ * tri par insertion. La liste est triée par ordre croissant.
+ */
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *current = NULL;
     listint_t *temp = NULL;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
-	{
 		return;
-	}
 
-		current = (*list)->next;
-
-	while (current != NULL)
-	{
-		temp = current;
-	
+	listint_t *current = (*list)->next;
+	while (current != NULL) {
+		listint_t *temp = current;
 		while (temp->prev != NULL && temp->n < temp->prev->n)
 		{
 			if (temp->next != NULL)
-			{
 				temp->next->prev = temp->prev;
-			}
 			temp->prev->next = temp->next;
 
 			temp->next = temp->prev;
@@ -33,16 +29,13 @@ void insertion_sort_list(listint_t **list)
 			temp->next->prev = temp;
 
 			if (temp->prev == NULL)
-			{
 				*list = temp;
-			} else
-			{
+			else
 				temp->prev->next = temp;
-			}
 
 			print_list(*list);
 		}
+
 		current = current->next;
 	}
 }
-
