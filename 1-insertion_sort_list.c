@@ -9,21 +9,13 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-<<<<<<< HEAD
 	listint_t *current = NULL;
     listint_t *temp = NULL;
-=======
-	listint_t *current = (*list)->next;
-	listint_t *temp = NULL;
->>>>>>> b96fe6a6e6ad81bab2dbb4bd95046d6a0b0d4832
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-<<<<<<< HEAD
 	current = (*list)->next;
-=======
->>>>>>> b96fe6a6e6ad81bab2dbb4bd95046d6a0b0d4832
 
 	while (current != NULL)
 	{
