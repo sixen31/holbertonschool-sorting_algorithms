@@ -36,7 +36,7 @@ void insertion_sort_list(listint_t **list)
 
                         print_list(*list);
                 }
-                if (current->next != NULL)  // Ajout de cette condition
+                if (current->next != NULL)
                         current = current->next;
        		else
 			break;
