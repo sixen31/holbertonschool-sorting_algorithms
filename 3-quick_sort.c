@@ -1,41 +1,39 @@
 #include "sort.h"
 
-/**
- * quick_sort - Sorts an array of integers in ascending order using the
- *              Quicksort algorithm.
- * @array: The array to be sorted.
- * @size: The size of the array.
- */
-
-void quick_sort(int *array, size_t size)
+void swap(int *a, int *b)
 {
-	if (size <= 1)
-		return;
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
 
-	int pivot = array[size - 1];
-	size_t i = 0;
+int partition(int *array, int low, int high)
+{
+	int pivot = array[high];
+	int i = low - 1;
 
-	for (size_t j = 0; j < size - 1; j++)
+	for (int j = low; j <= high; j++)
 	{
 		if (array[j] <= pivot)
 		{
-			int temp = array[i];
-			array[i] = array[j];
-			array[j] = temp;
 			i++;
+			swap(&array[i], &array[j]);
 		}
 	}
+	return i;
+}
 
-	int temp = array[i];
-	array[i] = array[size - 1];
-	array[size - 1] = temp;
-
-	for (size_t k = 0; k < size; k++)
+void quick_sort_helper(int *array, int low, int high)
+{
+	if (low < high)
 	{
-		printf("%d ", array[k]);
+		int partition_index = partition(array, low, high);
+		quick_sort_helper(array, low, partition_index - 1);
+		quick_sort_helper(array, partition_index + 1, high);
 	}
-	printf("\n");
+}
 
-	quick_sort(array, i);
-	quick_sort(array + i + 1, size - i - 1);
+void quick_sort(int *array, size_t size)
+{
+	quick_sort_helper(array, 0, size - 1);
 }
