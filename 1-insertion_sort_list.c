@@ -1,45 +1,42 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - Sorts a double-chained list insertion sort algorithm.
- *
- *@list: A pointer to a pointer to the first element in the list.
- *
- * Description :
- * This function sorts a double-chained list of the insertion sort algorithm.
- * It traverses the list by comparing with the previous element and reorganize
- * Rearrange the links accordingly to insert each element in its correct place
+ * insertion_sort_list - sorts a doubly linked list of integers in
+ * ascending order using the Insertion sort algorithm
+ * @list: pointer to list head pointer
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	if (list == NULL || *list == NULL)
+
+	listint_t *current, *insertion_point;
+
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	listint_t *current = (*list)->next;
-	listint_t *temp = NULL;
+	current = (*list)->next;
 
 	while (current != NULL)
 	{
-		temp = current;
-		while (temp->prev != NULL && temp->n < temp->prev->n)
+		insertion_point = current->prev;
+
+		while (insertion_point != NULL && insertion_point->n > current->n)
 		{
-			if (temp->next != NULL)
-				temp->next->prev = temp->prev;
-			temp->prev->next = temp->next;
+			insertion_point->next = current->next;
+			if (current->next != NULL)
+				current->next->prev = insertion_point;
 
-			temp->next = temp->prev;
-			temp->prev = temp->prev->prev;
-			temp->next->prev = temp;
+			current->prev = insertion_point->prev;
+			current->next = insertion_point;
+			insertion_point->prev = current;
 
-			if (temp->prev == NULL)
-				*list = temp;
+			if (current->prev != NULL)
+				current->prev->next = current;
 			else
-				temp->prev->next = temp;
+				*list = current;
 
+			insertion_point = current->prev;
 			print_list(*list);
 		}
-
 		current = current->next;
 	}
 }
