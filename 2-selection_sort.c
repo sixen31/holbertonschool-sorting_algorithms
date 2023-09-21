@@ -1,42 +1,30 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers in ascending
- *                        order using the Insertion sort algorithm
+ * selection_sort - trie un tableau d'entiers dans l'ordre croissant
+ *                  en utilisant l'algorithme de tri par sélection
  *
- * @list: double pointer to the head of the list
+ * @array: tableau d'entiers à trier
+ * @size: taille du tableau
  */
 void selection_sort(int *array, size_t size)
 {
-	listing_t *curr, *prev_node, *next_node;
+	size_t i, j, min_idx;
 
-	if (!list || !*list || !(*list)-next)
-		return;
-
-	curr = (*list)->next;
-	while (curr)
+	for (i = 0; i < size - 1; i++)
 	{
-		prev_node = curr->prev;
-		next_node = curr->next;
-
-		while (prev_node && prev_node->n > curr->n)
+		min_idx = i;
+		for (j = i + 1; j < size; j++)
 		{
-			if (prev_node->prev)
-				prev_node->prev->next = curr;
-			else
-				*list = curr;
-
-			curr->prev = prev_node->prev;
-			prev_node->next = next_node;
-
-			prev_node->prev = curr;
-			curr->next = prev_node;
-
-			prev_node = curr->prev;
-
-			print_list(*list);
+			if (array[j] < array[min_idx])
+				min_idx = j;
 		}
-
-		curr = next_node;
+		if (min_idx != i)
+		{
+			int tmp = array[i];
+			array[i] = array[min_idx];
+			array[min_idx] = tmp;
+			print_array(array, size);
+		}
 	}
 }
