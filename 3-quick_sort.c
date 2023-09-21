@@ -1,10 +1,10 @@
 #include "sort.h"
 
 /**
- * swap - Swaps two integers in an array
+ * swap - Échange deux entiers dans un tableau
  *
- * @a: First integer
- * @b: Second integer
+ * @a: Premier entier
+ * @b: Deuxième entier
  */
 void swap(int *a, int *b)
 {
@@ -14,14 +14,14 @@ void swap(int *a, int *b)
 }
 
 /**
- * partition - Lomuto partition scheme
+ * partition - Schéma de partitionnement Lomuto
  *
- * @array: Array to be partitioned
- * @low: Starting index of the partition to be sorted
- * @high: Ending index of the partition to be sorted
- * @size: Size of the array
+ * @array: Tableau à partitionner
+ * @low: Indice de début de la partition à trier
+ * @high: Indice de fin de la partition à trier
+ * @size: Taille du tableau
  *
- * Return: Index of the pivot element
+ * Return: Indice de l'élément pivot
  */
 int partition(int *array, int low, int high, size_t size)
 {
@@ -46,29 +46,30 @@ int partition(int *array, int low, int high, size_t size)
 }
 
 /**
- * quicksort - Quick sort algorithm
+ * quicksort - Algorithme de tri rapide
  *
- * @array: Array to be sorted
- * @low: Starting index of the partition to be sorted
- * @high: Ending index of the partition to be sorted
- * @size: Size of the array
+ * @array: Tableau à trier
+ * @low: Indice de début de la partition à trier
+ * @high: Indice de fin de la partition à trier
+ * @size: Taille du tableau
  */
 void quicksort(int *array, int low, int high, size_t size)
 {
+	int pi = partition(array, low, high, size);
+
 	if (low < high)
 	{
-		int pi = partition(array, low, high, size);
-
 		quicksort(array, low, pi - 1, size);
 		quicksort(array, pi + 1, high, size);
 	}
 }
 
 /**
- * quick_sort - Sorts an array of integers in ascending order using the Quick sort algorithm
+ * quick_sort - Trie un tableau d'entiers par ordre croissant en utilisant
+ * l'algorithme de tri rapide
  *
- * @array: Array to be sorted
- * @size: Size of the array
+ * @array: Tableau à trier
+ * @size: Taille du tableau
  */
 void quick_sort(int *array, size_t size)
 {
