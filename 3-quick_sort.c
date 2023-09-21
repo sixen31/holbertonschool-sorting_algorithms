@@ -1,10 +1,12 @@
 #include "sort.h"
 
+void quick_sort_helper(int *array, int low, int high, size_t size);
+
 /**
- * swap - Échange deux entiers dans un tableau
+ * swap - Swaps two integers in an array
  *
- * @a: Premier entier
- * @b: Deuxième entier
+ * @a: First integer
+ * @b: Second integer
  */
 void swap(int *a, int *b)
 {
@@ -14,14 +16,14 @@ void swap(int *a, int *b)
 }
 
 /**
- * partition - Schéma de partitionnement Lomuto
+ * partition - Lomuto partition scheme
  *
- * @array: Tableau à partitionner
- * @low: Indice de début de la partition à trier
- * @high: Indice de fin de la partition à trier
- * @size: Taille du tableau
+ * @array: Array to be partitioned
+ * @low: Starting index of the partition to be sorted
+ * @high: Ending index of the partition to be sorted
+ * @size: Size of the array
  *
- * Return: Indice de l'élément pivot
+ * Return: Index of the pivot element
  */
 int partition(int *array, int low, int high, size_t size)
 {
@@ -46,12 +48,12 @@ int partition(int *array, int low, int high, size_t size)
 }
 
 /**
- * quicksort - Algorithme de tri rapide
+ * quicksort - Quick sort algorithm
  *
- * @array: Tableau à trier
- * @low: Indice de début de la partition à trier
- * @high: Indice de fin de la partition à trier
- * @size: Taille du tableau
+ * @array: Array to be sorted
+ * @low: Starting index of the partition to be sorted
+ * @high: Ending index of the partition to be sorted
+ * @size: Size of the array
  */
 void quicksort(int *array, int low, int high, size_t size)
 {
@@ -59,22 +61,45 @@ void quicksort(int *array, int low, int high, size_t size)
 
 	if (low < high)
 	{
+
 		quicksort(array, low, pi - 1, size);
 		quicksort(array, pi + 1, high, size);
 	}
 }
 
 /**
- * quick_sort - Trie un tableau d'entiers par ordre croissant en utilisant
- * l'algorithme de tri rapide
+ * quick_sort - Sorts an array of integers in ascending order using
+ * the Quick sort algorithm
  *
- * @array: Tableau à trier
- * @size: Taille du tableau
+ * @array: Array to be sorted
+ * @size: Size of the array
  */
 void quick_sort(int *array, size_t size)
 {
+	int pi = partition(array, 0, size - 1, size);
+
 	if (array == NULL || size < 2)
 		return;
 
-	quicksort(array, 0, size - 1, size);
+	quick_sort_helper(array, 0, pi - 1, size);
+	quick_sort_helper(array, pi + 1, size - 1, size);
+}
+
+/**
+ * quick_sort_helper - Helper function for quick_sort
+ *
+ * @array: Array to be sorted
+ * @low: Starting index of the partition to be sorted
+ * @high: Ending index of the partition to be sorted
+ * @size: Size of the array
+ */
+void quick_sort_helper(int *array, int low, int high, size_t size)
+{
+	if (low < high)
+	{
+		int pi = partition(array, low, high, size);
+
+		quick_sort_helper(array, low, pi - 1, size);
+		quick_sort_helper(array, pi + 1, high, size);
+	}
 }
